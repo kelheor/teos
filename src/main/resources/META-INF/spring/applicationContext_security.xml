@@ -1,0 +1,51 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<http create-session="never" auto-config="true">
+	
+		<intercept-url pattern="/controller/**" access="ROLE_SUPERUSER, ROLE_USER"/>
+		<intercept-url pattern="/data*" access="ROLE_SUPERUSER, ROLE_USER"/>
+		
+		<custom-filter ref="usernamePasswordAuthenticationFilter"
+			before="FORM_LOGIN_FILTER" />
+			
+		<form-login login-page='/' />
+		
+		<custom-filter ref="basicAuthenticationFilter" before="BASIC_AUTH_FILTER" />
+
+	</http>
+	
+	
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider ref="userAuthenticationProvider" />
+	</authentication-manager>
+
+	<!-- Secure all beans loaded into the ApplicationContext -->
+	<global-method-security secured-annotations="enabled" />
+
+	<beans:bean id="usernamePasswordAuthenticationFilter"
+		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="authenticationSuccessHandler" ref="loginSuccessHandler" />
+		<beans:property name="authenticationFailureHandler" ref="loginFailureHandler" />
+		
+		<beans:property name="authenticationDetailsSource" ref="userAuthenticationDetailsSource" />
+	</beans:bean>
+
+	<beans:bean id="basicAuthenticationFilter"
+		class="org.springframework.security.web.authentication.www.BasicAuthenticationFilter">
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="authenticationDetailsSource" ref="userAuthenticationDetailsSource" />
+		<beans:property name="authenticationEntryPoint" ref="authenticationEntryPoint" />
+	</beans:bean>
+
+	<beans:bean id="authenticationEntryPoint"
+		class="org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint">
+		<beans:property name="realmName" value="Teos Realm" />
+	</beans:bean>
+
+</beans:beans>
