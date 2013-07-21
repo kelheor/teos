@@ -11,7 +11,7 @@ import java.util.Locale;
 
 @Controller
 @RequestMapping("/")
-public class MainController {
+public class MainController extends ExceptionHandlerController {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(MainController.class);
 
