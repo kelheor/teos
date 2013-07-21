@@ -1,6 +1,6 @@
 package com.academy.teos.dto.list;
 
-import com.academy.teos.entity.UserAccount;
+import com.academy.teos.dto.UserAccountDTO;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
 import java.util.ArrayList;
@@ -8,6 +8,6 @@ import java.util.ArrayList;
 /**
  * @author: Kelheor
  */
-@JsonDeserialize(contentAs = UserAccount.class)
-public class UserAccountDTOList extends ArrayList<UserAccount> {
+@JsonDeserialize(contentAs = UserAccountDTO.class)
+public class UserAccountDTOList extends ArrayList<UserAccountDTO> {
 }

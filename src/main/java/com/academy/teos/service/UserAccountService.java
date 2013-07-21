@@ -2,6 +2,7 @@ package com.academy.teos.service;
 
 import com.academy.teos.dto.UserAccountDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,13 +14,13 @@ public interface UserAccountService {
 
     public UserAccountDTO persist(UserAccountDTO userAccountDTO);
 
-    public List<UserAccountDTO> persist(List<UserAccountDTO> userAccountDTOList);
+    public ArrayList<UserAccountDTO> persist(List<UserAccountDTO> userAccountDTOList);
 
     public UserAccountDTO get(String id);
 
     public UserAccountDTO merge(UserAccountDTO userAccountDTO);
 
-    public List<UserAccountDTO> merge(List<UserAccountDTO> userAccountDTOList);
+    public ArrayList<UserAccountDTO> merge(List<UserAccountDTO> userAccountDTOList);
 
     public void delete(UserAccountDTO userAccountDTO);
 

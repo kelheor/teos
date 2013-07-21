@@ -5,6 +5,8 @@ import com.academy.teos.dao.UserAccountDAO;
 import com.academy.teos.dto.UserAccountDTO;
 import com.academy.teos.entity.UserAccount;
 import com.academy.teos.service.UserAccountService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ import java.util.List;
  */
 @Service("userAccountService")
 public class UserAccountServiceImpl implements UserAccountService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(UserAccountServiceImpl.class);
 
     @Autowired
     private UserAccountDAO userAccountDAO;
@@ -45,7 +49,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Override
     public UserAccountDTO get(String id) {
-        return null;
+        return UserAccountConverter.convertToUserAccountDTO(userAccountDAO.get(id));
     }
 
     @Override
@@ -72,8 +76,8 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
-    public List<UserAccountDTO> persist(List<UserAccountDTO> userAccountDTOList) {
-        List<UserAccountDTO> resultList = new ArrayList<UserAccountDTO>();
+    public ArrayList<UserAccountDTO> persist(List<UserAccountDTO> userAccountDTOList) {
+        ArrayList<UserAccountDTO> resultList = new ArrayList<UserAccountDTO>();
 
         for (UserAccountDTO userAccountDTO : userAccountDTOList) {
             userAccountDTO = persist(userAccountDTO);
@@ -84,8 +88,8 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
-    public List<UserAccountDTO> merge(List<UserAccountDTO> userAccountDTOList) {
-        List<UserAccountDTO> resultList = new ArrayList<UserAccountDTO>();
+    public ArrayList<UserAccountDTO> merge(List<UserAccountDTO> userAccountDTOList) {
+        ArrayList<UserAccountDTO> resultList = new ArrayList<UserAccountDTO>();
 
         for (UserAccountDTO userAccountDTO : userAccountDTOList) {
             userAccountDTO = merge(userAccountDTO);
