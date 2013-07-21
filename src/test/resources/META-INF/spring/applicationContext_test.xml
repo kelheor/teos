@@ -34,7 +34,7 @@
 		id="transactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-	<tx:annotation-driven
+	<tx:annotation-driven mode="aspectj"
 		transaction-manager="transactionManager" />
 	<bean
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"

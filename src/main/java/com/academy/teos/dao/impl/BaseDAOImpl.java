@@ -1,6 +1,7 @@
 package com.academy.teos.dao.impl;
 
 import com.academy.teos.dao.BaseDAO;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,10 +13,12 @@ import java.io.Serializable;
  * @author: Руслан
  */
 @Transactional(propagation= Propagation.REQUIRED)
+@Configurable
 public abstract class BaseDAOImpl<T, PK extends Serializable>
         implements BaseDAO<T, PK> {
 
     protected Class<T> entityClass;
+
     @PersistenceContext
     protected EntityManager entityManager;
 
@@ -38,7 +41,7 @@ public abstract class BaseDAOImpl<T, PK extends Serializable>
 
     @Override
     @Transactional
-    public T update(T o) {
+    public T merge(T o) {
         return this.entityManager.merge(o);
     }
 

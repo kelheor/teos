@@ -11,7 +11,7 @@ public interface DataDAO extends BaseDAO {
 
     public Data get(String id);
 
-    public Data update(Data o);
+    public Data merge(Data o);
 
     public void delete(Data o);
 }

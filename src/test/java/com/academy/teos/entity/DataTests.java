@@ -36,7 +36,7 @@ public class DataTests {
             Data savedData = dataDAO.get(data.getId());
             LOG.info(new String(savedData.getData(), "UTF-8"));
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Error testEntityCreate: " + e.getMessage(), e);
         }
 
     }
@@ -51,7 +51,7 @@ public class DataTests {
                 LOG.info(dataDTO.getId());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Error testJSONToDataDTOList: " + e.getMessage(), e);
         }
 
     }

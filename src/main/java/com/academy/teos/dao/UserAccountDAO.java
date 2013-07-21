@@ -11,7 +11,10 @@ public interface UserAccountDAO extends BaseDAO {
 
     public UserAccount get(String id);
 
-    public UserAccount update(UserAccount o);
+    public UserAccount merge(UserAccount o);
 
     public void delete(UserAccount o);
+
+    public UserAccount findUserAccountByUsernameAndPassword(String username, String password);
+
 }

@@ -26,8 +26,8 @@ public class DataDAOImpl extends BaseDAOImpl implements DataDAO {
         return (Data) super.get(id);
     }
 
-    public Data update(Data o) {
-        return (Data) super.update(o);
+    public Data merge(Data o) {
+        return (Data) super.merge(o);
     }
 
     public void delete(Data o) {

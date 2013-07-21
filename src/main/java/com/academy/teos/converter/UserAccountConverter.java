@@ -8,7 +8,7 @@ import com.academy.teos.entity.UserAccount;
  */
 public class UserAccountConverter {
 
-    public UserAccountDTO convertToUserAccountDTO(UserAccount userAccount) {
+    public static UserAccountDTO convertToUserAccountDTO(UserAccount userAccount) {
         UserAccountDTO userAccountDTO = new UserAccountDTO();
         userAccountDTO.setPassword(userAccount.getPassword());
         userAccountDTO.setUsername(userAccount.getUsername());
@@ -16,7 +16,7 @@ public class UserAccountConverter {
         return userAccountDTO;
     }
 
-    public UserAccount convertToUserAccount(UserAccountDTO userAccountDTO) {
+    public static UserAccount convertToUserAccount(UserAccountDTO userAccountDTO) {
         UserAccount userAccount = new UserAccount();
         userAccount.setPassword(userAccountDTO.getPassword());
         userAccount.setUsername(userAccountDTO.getUsername());

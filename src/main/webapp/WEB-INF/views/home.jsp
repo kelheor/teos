@@ -11,6 +11,10 @@
         }
     </style>
     <link href="/resources/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <script src="/resources/js/vendor/jquery-1.9.1.min.js"></script>
+    <script src="/resources/js/vendor/jquery-ui.min.js"></script>
+    <script src="/resources/js/vendor/raphael-min.js"></script>
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -42,6 +46,6 @@
 
 <!-- Le javascript
 ================================================== -->
-<script src="/resources/js/bootstrap.js"></script>
+<script src="/resources/js/vendor/bootstrap.min.js"></script>
 </body>
 </html>

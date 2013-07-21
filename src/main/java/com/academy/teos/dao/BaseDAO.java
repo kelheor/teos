@@ -11,7 +11,7 @@ public interface BaseDAO<T, PK extends Serializable> {
 
     public T get(PK id);
 
-    public T update(T o);
+    public T merge(T o);
 
     public void delete(T o);
 
