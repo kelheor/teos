@@ -11,13 +11,13 @@ import java.util.Locale;
 
 @Controller
 @RequestMapping("/")
-public class HomeController {
+public class MainController {
 	
-	private static final Logger LOG = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(MainController.class);
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		return "home";
+	public String main(Locale locale, Model model) {
+		return "main";
 	}
 	
 }
