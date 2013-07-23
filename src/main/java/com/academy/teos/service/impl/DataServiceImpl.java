@@ -8,6 +8,7 @@ import com.academy.teos.service.DataService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 /**
  * @author: Kelheor
  */
+@Service("dataService")
 public class DataServiceImpl implements DataService {
 
     private static final Logger LOG = LoggerFactory.getLogger(DataServiceImpl.class);

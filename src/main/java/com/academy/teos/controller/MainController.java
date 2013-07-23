@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
 
 @Controller
@@ -19,5 +20,13 @@ public class MainController extends ExceptionHandlerController {
 	public String main(Locale locale, Model model) {
 		return "main";
 	}
-	
+
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String main(HttpServletRequest request, Model model) {
+        LOG.info("Warning! Intruder alert: ");
+        LOG.info("IP: " + request.getRemoteAddr());
+        LOG.info("Client: " + request.getHeader("User-Agent"));
+        return "main";
+    }
+
 }
