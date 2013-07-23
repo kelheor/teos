@@ -3,12 +3,14 @@ package com.academy.teos.dao.impl;
 import com.academy.teos.dao.DataDAO;
 import com.academy.teos.entity.Data;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Repository;
 
 /**
  * @author: Руслан
  */
 @Repository
+@Configurable
 public class DataDAOImpl extends BaseDAOImpl implements DataDAO {
 
     public static final Logger LOG = Logger.getLogger(DataDAOImpl.class);

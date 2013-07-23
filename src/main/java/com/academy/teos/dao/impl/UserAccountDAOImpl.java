@@ -3,6 +3,7 @@ package com.academy.teos.dao.impl;
 import com.academy.teos.dao.UserAccountDAO;
 import com.academy.teos.entity.UserAccount;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -13,6 +14,7 @@ import java.util.List;
  * @author: Kelheor
  */
 @Repository
+@Configurable
 public class UserAccountDAOImpl extends BaseDAOImpl implements UserAccountDAO {
 
     public static final Logger LOG = Logger.getLogger(UserAccountDAOImpl.class);

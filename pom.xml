@@ -66,7 +66,11 @@
         </pluginRepository>
     </pluginRepositories>
 	<dependencies>
-
+        <dependency>
+            <groupId>net.bull.javamelody</groupId>
+            <artifactId>javamelody-core</artifactId>
+            <version>1.44.0</version>
+        </dependency>
         <!-- General dependencies for standard applications -->
         <dependency>
             <groupId>junit</groupId>
