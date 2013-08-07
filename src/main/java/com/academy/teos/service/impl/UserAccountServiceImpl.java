@@ -26,7 +26,11 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Override
     public UserAccountDTO findUserByUsernameAndPassword(String username, String password) {
-        return UserAccountConverter.convertToUserAccountDTO(userAccountDAO.findUserAccountByUsernameAndPassword(username, password));
+        UserAccount userAccount = userAccountDAO.findUserAccountByUsernameAndPassword(username, password);
+        if (userAccount.getUsername() == null && userAccount.getPassword() == null) {
+            return null;
+        }
+        return UserAccountConverter.convertToUserAccountDTO(userAccount);
     }
 
     @Override

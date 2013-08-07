@@ -21,6 +21,11 @@ public class MainController extends ExceptionHandlerController {
 		return "main";
 	}
 
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    public String signup(Locale locale, Model model) {
+        return "signup";
+    }
+
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String main(HttpServletRequest request, Model model) {
         LOG.info("Warning! Intruder alert: ");

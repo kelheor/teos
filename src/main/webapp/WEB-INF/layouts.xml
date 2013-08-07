@@ -9,8 +9,4 @@
         <put-attribute name="body" value="" />
         <put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
     </definition>
-    <definition name="signup" extends="baseLayout">
-        <put-attribute name="title" value="Signup" />
-        <put-attribute name="body" value="/WEB-INF/views/signup.jsp" />
-    </definition>
 </tiles-definitions>
