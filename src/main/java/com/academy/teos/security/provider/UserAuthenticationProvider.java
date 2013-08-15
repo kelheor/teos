@@ -1,11 +1,10 @@
 package com.academy.teos.security.provider;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Collection;
-
 import com.academy.teos.dto.UserAccountDTO;
+import com.academy.teos.security.Roles;
+import com.academy.teos.security.UserAuthentication;
+import com.academy.teos.security.UserAuthenticationDetails;
+import com.academy.teos.security.UserSession;
 import com.academy.teos.service.UserAccountService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +18,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import com.academy.teos.security.UserAuthenticationDetails;
-import com.academy.teos.security.Roles;
-import com.academy.teos.security.UserAuthentication;
-import com.academy.teos.security.UserSession;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Провайдер аутентификации пользователя

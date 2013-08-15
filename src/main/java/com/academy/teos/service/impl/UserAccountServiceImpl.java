@@ -27,6 +27,9 @@ public class UserAccountServiceImpl implements UserAccountService {
     @Override
     public UserAccountDTO findUserByUsernameAndPassword(String username, String password) {
         UserAccount userAccount = userAccountDAO.findUserAccountByUsernameAndPassword(username, password);
+        if (userAccount == null) {
+            return null;
+        }
         if (userAccount.getUsername() == null && userAccount.getPassword() == null) {
             return null;
         }

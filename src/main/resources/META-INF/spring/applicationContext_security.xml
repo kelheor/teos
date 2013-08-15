@@ -13,7 +13,7 @@ http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 		<custom-filter ref="usernamePasswordAuthenticationFilter"
 			before="FORM_LOGIN_FILTER" />
 			
-		<form-login login-page='/' />
+		<form-login login-page='/'  />
 		
 		<custom-filter ref="basicAuthenticationFilter" before="BASIC_AUTH_FILTER" />
 
@@ -30,7 +30,7 @@ http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 	<beans:bean id="usernamePasswordAuthenticationFilter"
 		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
 		<beans:property name="authenticationManager" ref="authenticationManager" />
-		<beans:property name="authenticationSuccessHandler" ref="loginSuccessHandler" />
+		<!--<beans:property name="authenticationSuccessHandler" ref="loginSuccessHandler" />-->
 		<beans:property name="authenticationFailureHandler" ref="loginFailureHandler" />
 		
 		<beans:property name="authenticationDetailsSource" ref="userAuthenticationDetailsSource" />
