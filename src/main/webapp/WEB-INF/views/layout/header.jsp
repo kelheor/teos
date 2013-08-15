@@ -52,8 +52,8 @@
                             <a href="#" id="account-button" role="button" class="dropdown-toggle"
                                data-toggle="dropdown">Account <b class="caret"></b></a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="account-button">
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Show details</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Edit account</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="/controller/userAccount/show_profile">Show details</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="/controller/userAccount/edit_profile">Edit account</a></li>
                                 <li role="presentation" class="divider"></li>
                                 <li role="presentation"><a role="menuitem" tabindex="-1"
                                                            href="/j_spring_security_logout">Logout</a></li>

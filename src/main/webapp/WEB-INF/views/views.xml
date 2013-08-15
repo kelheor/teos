@@ -6,8 +6,4 @@
     <definition name="main" extends="baseLayout">
         <put-attribute name="body" value="/WEB-INF/views/main.jsp" />
     </definition>
-    <definition name="signup" extends="baseLayout">
-        <put-attribute name="title" value="Signup" />
-        <put-attribute name="body" value="/WEB-INF/views/signup.jsp" />
-    </definition>
 </tiles-definitions>

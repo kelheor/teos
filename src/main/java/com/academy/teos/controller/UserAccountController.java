@@ -28,6 +28,16 @@ public class UserAccountController extends ExceptionHandlerController {
     @Autowired
     private UserAccountService userAccountService;
 
+    @RequestMapping(value = "/edit_profile", method = RequestMethod.GET)
+    public String edit_profile() {
+        return "edit_profile";
+    }
+
+    @RequestMapping(value = "/show_profile", method = RequestMethod.GET)
+    public String show_profile() {
+        return "show_profile";
+    }
+
     @RequestMapping(value = "/persist", method = RequestMethod.POST)
     public @ResponseBody
     Map<String, Object> persist(String userAccount) {

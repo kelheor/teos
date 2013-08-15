@@ -8,6 +8,8 @@ http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 	<http use-expressions="true" create-session="never" auto-config="true">
 	
 		<intercept-url pattern="/controller/**" access="hasAnyRole('ROLE_SUPERUSER', 'ROLE_USER')"/>
+        <intercept-url pattern="/show_profile" access="hasAnyRole('ROLE_SUPERUSER', 'ROLE_USER')"/>
+        <intercept-url pattern="/edit_profile" access="hasAnyRole('ROLE_SUPERUSER', 'ROLE_USER')"/>
 		<intercept-url pattern="/data*" access="hasAnyRole('ROLE_SUPERUSER', 'ROLE_USER')"/>
 		
 		<custom-filter ref="usernamePasswordAuthenticationFilter"
