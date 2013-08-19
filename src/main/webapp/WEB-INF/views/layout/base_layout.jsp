@@ -22,7 +22,6 @@
     <script src="/resources/js/vendor/angular.min.js"></script>
     <script src="/resources/js/vendor/angular-locale_ru.js"></script>
     <script src="/resources/js/teos.js"></script>
-
 </head>
 <body>
 
