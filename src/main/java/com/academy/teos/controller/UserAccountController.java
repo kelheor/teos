@@ -38,7 +38,7 @@ public class UserAccountController extends ExceptionHandlerController {
         return "show_profile";
     }
 
-    @RequestMapping(value = "/persist", method = RequestMethod.POST)
+    @RequestMapping(value = "/persist", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
     Map<String, Object> persist(String userAccount) {
         try {
@@ -52,7 +52,7 @@ public class UserAccountController extends ExceptionHandlerController {
         }
     }
 
-    @RequestMapping(value = "/persistList", method = RequestMethod.POST)
+    @RequestMapping(value = "/persistList", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
     Map<String, Object> persistList(String userAccountList) {
         try {
@@ -78,7 +78,7 @@ public class UserAccountController extends ExceptionHandlerController {
         }
     }
 
-    @RequestMapping(value = "/merge", method = RequestMethod.POST)
+    @RequestMapping(value = "/merge", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
     Map<String, Object> merge(String userAccount) {
         try {
@@ -92,7 +92,7 @@ public class UserAccountController extends ExceptionHandlerController {
         }
     }
 
-    @RequestMapping(value = "/mergeList", method = RequestMethod.POST)
+    @RequestMapping(value = "/mergeList", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
     Map<String, Object> mergeList(String userAccountList) {
         try {
@@ -106,7 +106,7 @@ public class UserAccountController extends ExceptionHandlerController {
         }
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
     Map<String, Object> delete(String userAccount) {
         try {
@@ -120,7 +120,7 @@ public class UserAccountController extends ExceptionHandlerController {
         }
     }
 
-    @RequestMapping(value = "/deleteList", method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteList", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
     Map<String, Object> deleteList(String userAccountList) {
         try {

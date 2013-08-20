@@ -8,16 +8,24 @@ var UserAccountController = function ($scope, $http) {
         password: ""
     };
 
-    $scope.showEdit = function () {
-        $scope.editableVideo = angular.copy(user);
-    };
-
     $scope.register = function() {
-        $http.post(serviceUrl, $scope.user)
-            .success(function (user) {
-                var data =  angular.toJson(user);
-                $scope.push(data);
-            });
+
+        user = $scope.user;
+        user.userAccountId = null;
+
+        $http({
+            url: serviceUrl,
+            method: "POST",
+            params: {
+                "userAccount": user
+            }
+        }).success(function(data, status, headers, config) {
+                $scope.data = data;
+            }).error(function(data, status, headers, config) {
+                $scope.status = status;
+        });
+
+
     };
 
 };
