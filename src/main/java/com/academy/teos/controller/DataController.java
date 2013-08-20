@@ -22,12 +22,12 @@ import java.util.Map;
 @RequestMapping("/controller/data")
 public class DataController {
 
-    private static final Logger LOG = Logger.getLogger(UserAccountController.class);
+    private static final Logger LOG = Logger.getLogger(DataController.class);
 
     @Autowired
     private DataService dataService;
 
-    @RequestMapping(value = "/persist", method = RequestMethod.POST)
+    @RequestMapping(value = "/persist", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
     Map<String, Object> persist(String data) {
         try {
@@ -41,7 +41,7 @@ public class DataController {
         }
     }
 
-    @RequestMapping(value = "/persistList", method = RequestMethod.POST)
+    @RequestMapping(value = "/persistList", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
     Map<String, Object> persistList(String dataList) {
         try {
@@ -67,7 +67,7 @@ public class DataController {
         }
     }
 
-    @RequestMapping(value = "/merge", method = RequestMethod.POST)
+    @RequestMapping(value = "/merge", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
     Map<String, Object> merge(String data) {
         try {
@@ -81,7 +81,7 @@ public class DataController {
         }
     }
 
-    @RequestMapping(value = "/mergeList", method = RequestMethod.POST)
+    @RequestMapping(value = "/mergeList", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
     Map<String, Object> mergeList(String dataList) {
         try {
@@ -95,7 +95,7 @@ public class DataController {
         }
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
     Map<String, Object> delete(String data) {
         try {
@@ -109,7 +109,7 @@ public class DataController {
         }
     }
 
-    @RequestMapping(value = "/deleteList", method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteList", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
     Map<String, Object> deleteList(String dataList) {
         try {

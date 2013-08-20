@@ -8,39 +8,24 @@ var UserAccountController = function ($scope, $http) {
         password: ""
     };
 
-    $scope.showEdit = function () {
-        $scope.editableVideo = angular.copy(user);
-    };
-
     $scope.register = function() {
 
-        /*$http({
-            method: 'POST',
-            url: serviceUrl,
-            data: $scope.user,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).success(function (user) {
-                var data =  angular.toJson(user);
-                $scope.push(data);
-        });*/
+        user = $scope.user;
+        user.userAccountId = null;
 
-
-        $.ajax({
-            type: 'POST',
+        $http({
             url: serviceUrl,
-            data: $scope.user,
-            dataType: 'json',
-            success: function() {
-                alert("SUCCESS");
+            method: "POST",
+            params: {
+                "userAccount": user
             }
+        }).success(function(data, status, headers, config) {
+                $scope.data = data;
+            }).error(function(data, status, headers, config) {
+                $scope.status = status;
         });
 
-/*
-        $http.post(serviceUrl, $scope.user)
-            .success(function (user) {
-                var data =  angular.toJson(user);
-                $scope.push(data);
-            });*/
+
     };
 
 };

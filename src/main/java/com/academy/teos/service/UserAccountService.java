@@ -12,15 +12,15 @@ public interface UserAccountService {
 
     public UserAccountDTO findUserByUsernameAndPassword(String username, String password);
 
-    public UserAccountDTO persist(UserAccountDTO userAccountDTO);
+    public UserAccountDTO persist(UserAccountDTO userAccountDTO) throws Exception;
 
-    public ArrayList<UserAccountDTO> persist(List<UserAccountDTO> userAccountDTOList);
+    public ArrayList<UserAccountDTO> persist(List<UserAccountDTO> userAccountDTOList) throws Exception;
 
     public UserAccountDTO get(String id);
 
-    public UserAccountDTO merge(UserAccountDTO userAccountDTO);
+    public UserAccountDTO merge(UserAccountDTO userAccountDTO) throws Exception;
 
-    public ArrayList<UserAccountDTO> merge(List<UserAccountDTO> userAccountDTOList);
+    public ArrayList<UserAccountDTO> merge(List<UserAccountDTO> userAccountDTOList) throws Exception;
 
     public void delete(UserAccountDTO userAccountDTO);
 

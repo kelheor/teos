@@ -37,7 +37,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
-    public UserAccountDTO persist(UserAccountDTO userAccountDTO) {
+    public UserAccountDTO persist(UserAccountDTO userAccountDTO) throws Exception {
 
         UserAccount userAccount = UserAccountConverter.convertToUserAccount(userAccountDTO);
 
@@ -60,7 +60,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
-    public UserAccountDTO merge(UserAccountDTO userAccountDTO) {
+    public UserAccountDTO merge(UserAccountDTO userAccountDTO) throws Exception {
 
         UserAccount userAccount = UserAccountConverter.convertToUserAccount(userAccountDTO);
 
@@ -83,7 +83,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
-    public ArrayList<UserAccountDTO> persist(List<UserAccountDTO> userAccountDTOList) {
+    public ArrayList<UserAccountDTO> persist(List<UserAccountDTO> userAccountDTOList) throws Exception {
         ArrayList<UserAccountDTO> resultList = new ArrayList<UserAccountDTO>();
 
         for (UserAccountDTO userAccountDTO : userAccountDTOList) {
@@ -95,7 +95,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
-    public ArrayList<UserAccountDTO> merge(List<UserAccountDTO> userAccountDTOList) {
+    public ArrayList<UserAccountDTO> merge(List<UserAccountDTO> userAccountDTOList) throws Exception {
         ArrayList<UserAccountDTO> resultList = new ArrayList<UserAccountDTO>();
 
         for (UserAccountDTO userAccountDTO : userAccountDTOList) {
