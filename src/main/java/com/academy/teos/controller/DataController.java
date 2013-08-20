@@ -4,9 +4,8 @@ import com.academy.teos.controller.utils.Ajax;
 import com.academy.teos.dto.DataDTO;
 import com.academy.teos.dto.list.DataDTOList;
 import com.academy.teos.service.DataService;
+import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +22,7 @@ import java.util.Map;
 @RequestMapping("/controller/data")
 public class DataController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DataController.class);
+    private static final Logger LOG = Logger.getLogger(DataController.class);
 
     @Autowired
     private DataService dataService;
