@@ -4,8 +4,6 @@ import com.academy.teos.controller.utils.Ajax;
 import com.academy.teos.dto.UserAccountDTO;
 import com.academy.teos.service.UserAccountService;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +17,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/")
 public class MainController extends ExceptionHandlerController {
-	
-	private static final Logger LOG = LoggerFactory.getLogger(MainController.class);
+
+    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(UserAccountController.class);
 
     @Autowired
     private UserAccountService userAccountService;
@@ -34,6 +32,7 @@ public class MainController extends ExceptionHandlerController {
     public @ResponseBody
     Map<String, Object> register(String userAccount) {
         try {
+            LOG.info(userAccount);
             ObjectMapper mapper = new ObjectMapper();
             UserAccountDTO userAccountDTO = mapper.readValue(userAccount, UserAccountDTO.class);
             userAccountDTO = userAccountService.persist(userAccountDTO);

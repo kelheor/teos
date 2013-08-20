@@ -454,13 +454,11 @@
         <dependency>
             <artifactId>jackson-core-asl</artifactId>
             <groupId>org.codehaus.jackson</groupId>
-            <scope>provided</scope>
             <version>1.9.0</version>
         </dependency>
         <dependency>
             <artifactId>jackson-mapper-asl</artifactId>
             <groupId>org.codehaus.jackson</groupId>
-            <scope>provided</scope>
             <version>1.9.0</version>
         </dependency>
 				
