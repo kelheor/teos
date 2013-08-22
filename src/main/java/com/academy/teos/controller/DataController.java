@@ -3,6 +3,7 @@ package com.academy.teos.controller;
 import com.academy.teos.controller.utils.Ajax;
 import com.academy.teos.dto.DataDTO;
 import com.academy.teos.dto.list.DataDTOList;
+import com.academy.teos.service.APIKeyService;
 import com.academy.teos.service.DataService;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -19,7 +20,7 @@ import java.util.Map;
  * @author: Kelheor
  */
 @Controller
-@RequestMapping("/controller/data")
+@RequestMapping("/api/data")
 public class DataController {
 
     private static final Logger LOG = Logger.getLogger(DataController.class);
@@ -27,10 +28,16 @@ public class DataController {
     @Autowired
     private DataService dataService;
 
+    @Autowired
+    private APIKeyService apiKeyService;
+
     @RequestMapping(value = "/persist", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> persist(String data) {
+    Map<String, Object> persist(String APIKey, String data) {
         try {
+            if(!apiKeyService.check(APIKey)) {
+                return Ajax.errorResponse("Wrong API key");
+            }
             ObjectMapper mapper = new ObjectMapper();
             DataDTO dataDTO = mapper.readValue(data, DataDTO.class);
             dataDTO = dataService.persist(dataDTO);
@@ -43,8 +50,11 @@ public class DataController {
 
     @RequestMapping(value = "/persistList", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> persistList(String dataList) {
+    Map<String, Object> persistList(String APIKey, String dataList) {
         try {
+            if(!apiKeyService.check(APIKey)) {
+                return Ajax.errorResponse("Wrong API key");
+            }
             ObjectMapper mapper = new ObjectMapper();
             ArrayList<DataDTO> dataDTOs = mapper.readValue(dataList, DataDTOList.class);
             dataDTOs = dataService.persist(dataDTOs);
@@ -57,8 +67,11 @@ public class DataController {
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public @ResponseBody
-    Map<String, Object> get(String id) {
+    Map<String, Object> get(String APIKey, String id) {
         try {
+            if(!apiKeyService.check(APIKey)) {
+                return Ajax.errorResponse("Wrong API key");
+            }
             DataDTO dataDTO = dataService.get(id);
             return Ajax.successResponse(dataDTO);
         } catch (Exception e) {
@@ -69,8 +82,11 @@ public class DataController {
 
     @RequestMapping(value = "/merge", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> merge(String data) {
+    Map<String, Object> merge(String APIKey, String data) {
         try {
+            if(!apiKeyService.check(APIKey)) {
+                return Ajax.errorResponse("Wrong API key");
+            }
             ObjectMapper mapper = new ObjectMapper();
             DataDTO dataDTO = mapper.readValue(data, DataDTO.class);
             dataDTO = dataService.merge(dataDTO);
@@ -83,8 +99,11 @@ public class DataController {
 
     @RequestMapping(value = "/mergeList", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> mergeList(String dataList) {
+    Map<String, Object> mergeList(String APIKey, String dataList) {
         try {
+            if(!apiKeyService.check(APIKey)) {
+                return Ajax.errorResponse("Wrong API key");
+            }
             ObjectMapper mapper = new ObjectMapper();
             ArrayList<DataDTO> dataDTOs = mapper.readValue(dataList, DataDTOList.class);
             dataDTOs = dataService.merge(dataDTOs);
@@ -97,8 +116,11 @@ public class DataController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> delete(String data) {
+    Map<String, Object> delete(String APIKey, String data) {
         try {
+            if(!apiKeyService.check(APIKey)) {
+                return Ajax.errorResponse("Wrong API key");
+            }
             ObjectMapper mapper = new ObjectMapper();
             DataDTO dataDTO = mapper.readValue(data, DataDTO.class);
             dataService.delete(dataDTO);
@@ -111,8 +133,11 @@ public class DataController {
 
     @RequestMapping(value = "/deleteList", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> deleteList(String dataList) {
+    Map<String, Object> deleteList(String APIKey, String dataList) {
         try {
+            if(!apiKeyService.check(APIKey)) {
+                return Ajax.errorResponse("Wrong API key");
+            }
             ObjectMapper mapper = new ObjectMapper();
             ArrayList<DataDTO> dataDTOs = mapper.readValue(dataList, DataDTOList.class);
             dataService.delete(dataDTOs);

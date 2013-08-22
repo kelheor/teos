@@ -3,6 +3,7 @@ package com.academy.teos.controller;
 import com.academy.teos.controller.utils.Ajax;
 import com.academy.teos.dto.UserAccountDTO;
 import com.academy.teos.dto.list.UserAccountDTOList;
+import com.academy.teos.service.APIKeyService;
 import com.academy.teos.service.UserAccountService;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -19,7 +20,7 @@ import java.util.Map;
  * @author: Kelheor
  */
 @Controller
-@RequestMapping("/controller/userAccount")
+@RequestMapping("/api/userAccount")
 public class UserAccountController extends ExceptionHandlerController {
 
     private static final Logger LOG = Logger.getLogger(UserAccountController.class);
@@ -27,20 +28,17 @@ public class UserAccountController extends ExceptionHandlerController {
     @Autowired
     private UserAccountService userAccountService;
 
-    @RequestMapping(value = "/edit_profile", method = RequestMethod.GET)
-    public String edit_profile() {
-        return "edit_profile";
-    }
+    @Autowired
+    private APIKeyService apiKeyService;
 
-    @RequestMapping(value = "/show_profile", method = RequestMethod.GET)
-    public String show_profile() {
-        return "show_profile";
-    }
 
     @RequestMapping(value = "/persist", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> persist(String userAccount) {
+    Map<String, Object> persist(String APIKey, String userAccount) {
         try {
+            if(!apiKeyService.check(APIKey)) {
+                return Ajax.errorResponse("Wrong API key");
+            }
             ObjectMapper mapper = new ObjectMapper();
             UserAccountDTO userAccountDTO = mapper.readValue(userAccount, UserAccountDTO.class);
             userAccountDTO = userAccountService.persist(userAccountDTO);
@@ -53,8 +51,11 @@ public class UserAccountController extends ExceptionHandlerController {
 
     @RequestMapping(value = "/persistList", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> persistList(String userAccountList) {
+    Map<String, Object> persistList(String APIKey, String userAccountList) {
         try {
+            if(!apiKeyService.check(APIKey)) {
+                return Ajax.errorResponse("Wrong API key");
+            }
             ObjectMapper mapper = new ObjectMapper();
             ArrayList<UserAccountDTO> userAccountDTOs = mapper.readValue(userAccountList, UserAccountDTOList.class);
             userAccountDTOs = userAccountService.persist(userAccountDTOs);
@@ -67,8 +68,11 @@ public class UserAccountController extends ExceptionHandlerController {
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public @ResponseBody
-    Map<String, Object> get(String id) {
+    Map<String, Object> get(String APIKey, String id) {
         try {
+            if(!apiKeyService.check(APIKey)) {
+                return Ajax.errorResponse("Wrong API key");
+            }
             UserAccountDTO userAccountDTO = userAccountService.get(id);
             return Ajax.successResponse(userAccountDTO);
         } catch (Exception e) {
@@ -79,8 +83,11 @@ public class UserAccountController extends ExceptionHandlerController {
 
     @RequestMapping(value = "/merge", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> merge(String userAccount) {
+    Map<String, Object> merge(String APIKey, String userAccount) {
         try {
+            if(!apiKeyService.check(APIKey)) {
+                return Ajax.errorResponse("Wrong API key");
+            }
             ObjectMapper mapper = new ObjectMapper();
             UserAccountDTO userAccountDTO = mapper.readValue(userAccount, UserAccountDTO.class);
             userAccountDTO = userAccountService.merge(userAccountDTO);
@@ -93,8 +100,11 @@ public class UserAccountController extends ExceptionHandlerController {
 
     @RequestMapping(value = "/mergeList", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> mergeList(String userAccountList) {
+    Map<String, Object> mergeList(String APIKey, String userAccountList) {
         try {
+            if(!apiKeyService.check(APIKey)) {
+                return Ajax.errorResponse("Wrong API key");
+            }
             ObjectMapper mapper = new ObjectMapper();
             ArrayList<UserAccountDTO> userAccountDTOs = mapper.readValue(userAccountList, UserAccountDTOList.class);
             userAccountDTOs = userAccountService.merge(userAccountDTOs);
@@ -107,8 +117,11 @@ public class UserAccountController extends ExceptionHandlerController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> delete(String userAccount) {
+    Map<String, Object> delete(String APIKey, String userAccount) {
         try {
+            if(!apiKeyService.check(APIKey)) {
+                return Ajax.errorResponse("Wrong API key");
+            }
             ObjectMapper mapper = new ObjectMapper();
             UserAccountDTO userAccountDTO = mapper.readValue(userAccount, UserAccountDTO.class);
             userAccountService.delete(userAccountDTO);
@@ -121,8 +134,11 @@ public class UserAccountController extends ExceptionHandlerController {
 
     @RequestMapping(value = "/deleteList", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> deleteList(String userAccountList) {
+    Map<String, Object> deleteList(String APIKey, String userAccountList) {
         try {
+            if(!apiKeyService.check(APIKey)) {
+                return Ajax.errorResponse("Wrong API key");
+            }
             ObjectMapper mapper = new ObjectMapper();
             ArrayList<UserAccountDTO> userAccountDTOs = mapper.readValue(userAccountList, UserAccountDTOList.class);
             userAccountService.delete(userAccountDTOs);

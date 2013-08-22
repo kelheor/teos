@@ -13,4 +13,3 @@
 </div> <!-- /container -->
 
 <script src="/resources/js/controllers/user_account_controller.js"></script>
-<script src="/resources/js/views/user_account/create_user_account.js"></script>

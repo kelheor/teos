@@ -8,8 +8,10 @@ import com.academy.teos.service.UserAccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +51,21 @@ public class UserAccountServiceImpl implements UserAccountService {
             throw new IllegalArgumentException("Password can't be null");
         }
 
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
+        messageDigest.update(userAccount.getPassword().getBytes());
+        byte byteData[] = messageDigest.digest();
+        StringBuffer sb = new StringBuffer();
+        for(int i = 0; i < byteData.length; i++) {
+            sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        userAccount.setPassword(sb.toString());
+
+        UserAccount existingUserAccountDTO = userAccountDAO.findUserByUsername(userAccount.getUsername());
+
+        if(existingUserAccountDTO != null) {
+            throw new Exception("Пользователь с таким именем уже существует");
+        }
+
         userAccount = userAccountDAO.persist(userAccount);
 
         return UserAccountConverter.convertToUserAccountDTO(userAccount);
@@ -63,6 +80,21 @@ public class UserAccountServiceImpl implements UserAccountService {
     public UserAccountDTO merge(UserAccountDTO userAccountDTO) throws Exception {
 
         UserAccount userAccount = UserAccountConverter.convertToUserAccount(userAccountDTO);
+
+        if (userAccount.getPassword() != null) {
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
+            messageDigest.update(userAccount.getPassword().getBytes());
+            byte byteData[] = messageDigest.digest();
+            StringBuffer sb = new StringBuffer();
+            for(int i = 0; i < byteData.length; i++) {
+                sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            userAccount.setPassword(sb.toString());
+        } else {
+            UserAccount oldUserAccount = userAccountDAO.get(userAccount.getUserAccountId());
+            userAccount.setPassword(oldUserAccount.getPassword());
+        }
+
 
         if (userAccount.getUsername() == null) {
             throw new IllegalArgumentException("Username can't be null");

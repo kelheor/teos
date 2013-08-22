@@ -496,13 +496,6 @@
             <artifactId>jackson-jaxrs-json-provider</artifactId>
             <version>${jackson-2-version}</version>
         </dependency>
-        <!-- Support for JAX-B annotations as additional configuration -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-jaxb-annotations</artifactId>
-            <version>${jackson-2-version}</version>
-        </dependency>
-
 		<!-- @Inject -->
 		<dependency>
 			<groupId>javax.inject</groupId>

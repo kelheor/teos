@@ -19,12 +19,6 @@ public class UserAccountDAOImpl extends BaseDAOImpl implements UserAccountDAO {
 
     public static final Logger LOG = Logger.getLogger(UserAccountDAOImpl.class);
 
-    public static final EntityManager entityManager() {
-        EntityManager em = new UserAccountDAOImpl().entityManager;
-        if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
-        return em;
-    }
-
     public UserAccount findUserAccountByUsernameAndPassword(String username, String password) {
         TypedQuery<UserAccount> q = entityManager().createQuery("SELECT o FROM UserAccount o WHERE o.username = :username AND o.password = :password ", UserAccount.class);
         q.setParameter("username", username);
@@ -35,6 +29,24 @@ public class UserAccountDAOImpl extends BaseDAOImpl implements UserAccountDAO {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public UserAccount findUserByUsername(String username) {
+        TypedQuery<UserAccount> q = entityManager().createQuery("SELECT o FROM UserAccount o WHERE o.username = :username ", UserAccount.class);
+        q.setParameter("username", username);
+        List<UserAccount> userAccountList = q.getResultList();
+        if(userAccountList != null && userAccountList.size() > 0) {
+            return userAccountList.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    public static final EntityManager entityManager() {
+        EntityManager em = new UserAccountDAOImpl().entityManager;
+        if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
+        return em;
     }
 
     public UserAccountDAOImpl() {

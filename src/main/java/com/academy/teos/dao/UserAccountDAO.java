@@ -17,4 +17,6 @@ public interface UserAccountDAO extends BaseDAO {
 
     public UserAccount findUserAccountByUsernameAndPassword(String username, String password);
 
+    public UserAccount findUserByUsername(String username);
+
 }

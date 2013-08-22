@@ -8,6 +8,7 @@ var UserAccountController = function ($scope, $http) {
         password: ""
     };
 
+
     $scope.register = function() {
 
         user = $scope.user;
@@ -20,9 +21,13 @@ var UserAccountController = function ($scope, $http) {
                 "userAccount": user
             }
         }).success(function(data, status, headers, config) {
-                $scope.data = data;
+                if(data.result == 'success') {
+                    //document.location.href = '/';
+                } else {
+                    alert(data.message);
+                }
             }).error(function(data, status, headers, config) {
-                $scope.status = status;
+                alert(data.message);
         });
 
 
