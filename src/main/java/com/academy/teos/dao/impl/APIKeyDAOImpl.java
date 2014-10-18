@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class APIKeyDAOImpl extends BaseDAOImpl implements APIKeyDAO {
     public static final Logger LOG = Logger.getLogger(APIKeyDAOImpl.class);
 
     public boolean check(String apiKey) {
-        TypedQuery<APIKey> q = entityManager().createQuery("SELECT o FROM APIKey o WHERE o.apiKey = :apiKey ", APIKey.class);
+        TypedQuery<APIKey> q = getEntityManager().createQuery("SELECT o FROM APIKey o WHERE o.apiKey = :apiKey ", APIKey.class);
         q.setParameter("apiKey", apiKey);
         List<APIKey> userAccountList = q.getResultList();
         if(userAccountList != null && userAccountList.size() > 0) {
@@ -28,12 +27,6 @@ public class APIKeyDAOImpl extends BaseDAOImpl implements APIKeyDAO {
         } else {
             return false;
         }
-    }
-
-    public static final EntityManager entityManager() {
-        EntityManager em = new UserAccountDAOImpl().entityManager;
-        if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
-        return em;
     }
 
     public APIKeyDAOImpl() {

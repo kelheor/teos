@@ -6,8 +6,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-
 /**
  * @author: Руслан
  */
@@ -19,12 +17,6 @@ public class DataDAOImpl extends BaseDAOImpl implements DataDAO {
 
     public DataDAOImpl() {
         super(Data.class);
-    }
-
-    public static final EntityManager entityManager() {
-        EntityManager em = new UserAccountDAOImpl().entityManager;
-        if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
-        return em;
     }
 
     public Data persist(Data o) {

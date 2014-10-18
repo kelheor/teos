@@ -9,8 +9,9 @@ import java.io.Serializable;
  * @author: Руслан
  */
 @Entity
+@Cacheable
 @Table(name="data")
-public class Data implements BaseEntity {
+public class Data extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "hibernate-uuid")

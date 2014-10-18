@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class UserAccountDAOImpl extends BaseDAOImpl implements UserAccountDAO {
     public static final Logger LOG = Logger.getLogger(UserAccountDAOImpl.class);
 
     public UserAccount findUserAccountByUsernameAndPassword(String username, String password) {
-        TypedQuery<UserAccount> q = entityManager().createQuery("SELECT o FROM UserAccount o WHERE o.username = :username AND o.password = :password ", UserAccount.class);
+        TypedQuery<UserAccount> q = getEntityManager().createQuery("SELECT o FROM UserAccount o WHERE o.username = :username AND o.password = :password ", UserAccount.class);
         q.setParameter("username", username);
         q.setParameter("password", password);
         List<UserAccount> userAccountList = q.getResultList();
@@ -33,7 +32,7 @@ public class UserAccountDAOImpl extends BaseDAOImpl implements UserAccountDAO {
 
     @Override
     public UserAccount findUserByUsername(String username) {
-        TypedQuery<UserAccount> q = entityManager().createQuery("SELECT o FROM UserAccount o WHERE o.username = :username ", UserAccount.class);
+        TypedQuery<UserAccount> q = getEntityManager().createQuery("SELECT o FROM UserAccount o WHERE o.username = :username ", UserAccount.class);
         q.setParameter("username", username);
         List<UserAccount> userAccountList = q.getResultList();
         if(userAccountList != null && userAccountList.size() > 0) {
@@ -41,12 +40,6 @@ public class UserAccountDAOImpl extends BaseDAOImpl implements UserAccountDAO {
         } else {
             return null;
         }
-    }
-
-    public static final EntityManager entityManager() {
-        EntityManager em = new UserAccountDAOImpl().entityManager;
-        if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
-        return em;
     }
 
     public UserAccountDAOImpl() {

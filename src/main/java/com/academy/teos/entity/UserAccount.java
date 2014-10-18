@@ -9,8 +9,9 @@ import java.io.Serializable;
  * @author: Kelheor
  */
 @Entity
+@Cacheable
 @Table(name="user_account")
-public class UserAccount  implements BaseEntity {
+public class UserAccount extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "hibernate-uuid")
@@ -25,7 +26,7 @@ public class UserAccount  implements BaseEntity {
     private String password;
 
     @Override
-    public Serializable getId() {
+    public String getId() {
         return getUserAccountId();
     }
 

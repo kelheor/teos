@@ -1,6 +1,7 @@
 package com.academy.teos.controller;
 
 import com.academy.teos.controller.utils.Ajax;
+import com.academy.teos.controller.utils.RestException;
 import com.academy.teos.dto.UserAccountDTO;
 import com.academy.teos.dto.list.UserAccountDTOList;
 import com.academy.teos.service.APIKeyService;
@@ -34,7 +35,7 @@ public class UserAccountController extends ExceptionHandlerController {
 
     @RequestMapping(value = "/persist", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> persist(String APIKey, String userAccount) {
+    Map<String, Object> persist(String APIKey, String userAccount) throws RestException {
         try {
             if(!apiKeyService.check(APIKey)) {
                 return Ajax.errorResponse("Wrong API key");
@@ -44,14 +45,13 @@ public class UserAccountController extends ExceptionHandlerController {
             userAccountDTO = userAccountService.persist(userAccountDTO);
             return Ajax.successResponse(userAccountDTO);
         } catch (Exception e) {
-            LOG.error("Error: " + e.getMessage(), e);
-            return Ajax.errorResponse(e.getMessage());
+            throw new RestException(e);
         }
     }
 
     @RequestMapping(value = "/persistList", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> persistList(String APIKey, String userAccountList) {
+    Map<String, Object> persistList(String APIKey, String userAccountList) throws RestException {
         try {
             if(!apiKeyService.check(APIKey)) {
                 return Ajax.errorResponse("Wrong API key");
@@ -61,14 +61,13 @@ public class UserAccountController extends ExceptionHandlerController {
             userAccountDTOs = userAccountService.persist(userAccountDTOs);
             return Ajax.successResponse(userAccountDTOs);
         } catch (Exception e) {
-            LOG.error("Error: " + e.getMessage(), e);
-            return Ajax.errorResponse(e.getMessage());
+            throw new RestException(e);
         }
     }
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public @ResponseBody
-    Map<String, Object> get(String APIKey, String id) {
+    Map<String, Object> get(String APIKey, String id) throws RestException {
         try {
             if(!apiKeyService.check(APIKey)) {
                 return Ajax.errorResponse("Wrong API key");
@@ -76,14 +75,13 @@ public class UserAccountController extends ExceptionHandlerController {
             UserAccountDTO userAccountDTO = userAccountService.get(id);
             return Ajax.successResponse(userAccountDTO);
         } catch (Exception e) {
-            LOG.error("Error: " + e.getMessage(), e);
-            return Ajax.errorResponse(e.getMessage());
+            throw new RestException(e);
         }
     }
 
     @RequestMapping(value = "/merge", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> merge(String APIKey, String userAccount) {
+    Map<String, Object> merge(String APIKey, String userAccount) throws RestException {
         try {
             if(!apiKeyService.check(APIKey)) {
                 return Ajax.errorResponse("Wrong API key");
@@ -93,14 +91,13 @@ public class UserAccountController extends ExceptionHandlerController {
             userAccountDTO = userAccountService.merge(userAccountDTO);
             return Ajax.successResponse(userAccountDTO);
         } catch (Exception e) {
-            LOG.error("Error: " + e.getMessage(), e);
-            return Ajax.errorResponse(e.getMessage());
+            throw new RestException(e);
         }
     }
 
     @RequestMapping(value = "/mergeList", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> mergeList(String APIKey, String userAccountList) {
+    Map<String, Object> mergeList(String APIKey, String userAccountList) throws RestException {
         try {
             if(!apiKeyService.check(APIKey)) {
                 return Ajax.errorResponse("Wrong API key");
@@ -110,14 +107,13 @@ public class UserAccountController extends ExceptionHandlerController {
             userAccountDTOs = userAccountService.merge(userAccountDTOs);
             return Ajax.successResponse(userAccountDTOs);
         } catch (Exception e) {
-            LOG.error("Error: " + e.getMessage(), e);
-            return Ajax.errorResponse(e.getMessage());
+            throw new RestException(e);
         }
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> delete(String APIKey, String userAccount) {
+    Map<String, Object> delete(String APIKey, String userAccount) throws RestException {
         try {
             if(!apiKeyService.check(APIKey)) {
                 return Ajax.errorResponse("Wrong API key");
@@ -127,14 +123,13 @@ public class UserAccountController extends ExceptionHandlerController {
             userAccountService.delete(userAccountDTO);
             return Ajax.emptyResponse();
         } catch (Exception e) {
-            LOG.error("Error: " + e.getMessage(), e);
-            return Ajax.errorResponse(e.getMessage());
+            throw new RestException(e);
         }
     }
 
     @RequestMapping(value = "/deleteList", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> deleteList(String APIKey, String userAccountList) {
+    Map<String, Object> deleteList(String APIKey, String userAccountList) throws RestException {
         try {
             if(!apiKeyService.check(APIKey)) {
                 return Ajax.errorResponse("Wrong API key");
@@ -144,8 +139,7 @@ public class UserAccountController extends ExceptionHandlerController {
             userAccountService.delete(userAccountDTOs);
             return Ajax.emptyResponse();
         } catch (Exception e) {
-            LOG.error("Error: " + e.getMessage(), e);
-            return Ajax.errorResponse(e.getMessage());
+            throw new RestException(e);
         }
     }
 }

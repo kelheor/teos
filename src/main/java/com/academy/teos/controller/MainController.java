@@ -1,6 +1,7 @@
 package com.academy.teos.controller;
 
 import com.academy.teos.controller.utils.Ajax;
+import com.academy.teos.controller.utils.RestException;
 import com.academy.teos.dto.UserAccountDTO;
 import com.academy.teos.security.Roles;
 import com.academy.teos.security.UserAuthentication;
@@ -47,7 +48,7 @@ public class MainController extends ExceptionHandlerController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> register(@RequestParam(value = "userAccount", required = true) String userAccount, HttpServletRequest request) {
+    Map<String, Object> register(@RequestParam(value = "userAccount", required = true) String userAccount, HttpServletRequest request) throws RestException {
         try {
             ObjectMapper mapper = new ObjectMapper();
             UserAccountDTO userAccountDTO = mapper.readValue(userAccount, UserAccountDTO.class);
@@ -71,8 +72,7 @@ public class MainController extends ExceptionHandlerController {
 
             return Ajax.successResponse(userAccountDTO);
         } catch (Exception e) {
-            LOG.error("Error: " + e.getMessage(), e);
-            return Ajax.errorResponse(e.getMessage());
+            throw new RestException(e);
         }
     }
 

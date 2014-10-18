@@ -1,55 +1,77 @@
 package com.academy.teos.dao.impl;
 
 import com.academy.teos.dao.BaseDAO;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.transaction.annotation.Propagation;
+import com.academy.teos.dao.BaseRepository;
+import com.academy.teos.entity.BaseEntity;
+import com.academy.teos.utils.ApplicationContextProvider;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.io.Serializable;
 
-/**
- * @author: Руслан
- */
-@Transactional(propagation= Propagation.REQUIRED)
-@Configurable
-public abstract class BaseDAOImpl<T, PK extends Serializable>
-        implements BaseDAO<T, PK> {
+public class BaseDAOImpl<T extends BaseEntity> implements BaseDAO<T> {
 
     protected Class<T> entityClass;
 
-    @PersistenceContext
-    protected EntityManager entityManager;
+    EntityManager entityManager;
 
-    @SuppressWarnings("unchecked")
+    public EntityManager getEntityManager() {
+        if (this.entityManager == null) {
+            this.entityManager = ((BaseRepository) ApplicationContextProvider.getContext().getBean(
+                    "ElectraBaseRepository")).getEntityManager();
+        }
+        return this.entityManager;
+    }
+
     public BaseDAOImpl(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
     @Override
-    @Transactional
+    @Transactional("transactionManager")
     public T persist(T o) {
-        this.entityManager.persist(o);
+        getEntityManager().persist(o);
         return o;
     }
 
     @Override
-    public T get(PK id) {
-        return this.entityManager.find(entityClass, id);
+    public T get(String id) {
+        T obj = null;
+        try {
+            if (id == null || id.length() == 0) return null;
+            obj = getEntityManager().find(entityClass, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return obj;
     }
 
     @Override
-    @Transactional
+    @Transactional("transactionManager")
     public T merge(T o) {
-        return this.entityManager.merge(o);
+        T merged = getEntityManager().merge(o);
+        this.entityManager.flush();
+        return merged;
     }
 
     @Override
-    @Transactional
+    @Transactional("transactionManager")
     public void delete(T t) {
-        t = this.entityManager.merge(t);
-        this.entityManager.remove(t);
+        if (this.entityManager == null) this.entityManager = getEntityManager();
+        if (this.entityManager.contains(t)) {
+            this.entityManager.remove(t);
+        } else {
+            T attached = this.get(t.getId());
+            this.entityManager.remove(attached);
+        }
     }
 
+    @Override
+    public T reattach(T o) {
+        if (this.entityManager.contains(o)) {
+            return o;
+        } else {
+            T attached = this.get(o.getId());
+            return attached;
+        }
+    }
 }

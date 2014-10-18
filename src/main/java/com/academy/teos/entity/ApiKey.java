@@ -9,8 +9,9 @@ import java.io.Serializable;
  * @author: Kelheor
  */
 @Entity
+@Cacheable
 @Table(name="api_key")
-public class APIKey implements BaseEntity  {
+public class APIKey extends BaseEntity  {
 
     @Id
     @GeneratedValue(generator = "hibernate-uuid")
@@ -26,7 +27,7 @@ public class APIKey implements BaseEntity  {
     private String apiKey;
 
     @Override
-    public Serializable getId() {
+    public String getId() {
         return getApiKeyId();
     }
 

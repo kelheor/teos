@@ -1,19 +1,17 @@
 package com.academy.teos.dao;
 
-import java.io.Serializable;
+import com.academy.teos.entity.BaseEntity;
 
-/**
- * @author: Руслан
- */
-public interface BaseDAO<T, PK extends Serializable> {
+public interface BaseDAO<T extends BaseEntity> {
 
     public T persist(T o);
 
-    public T get(PK id);
+    public T get(String id);
 
     public T merge(T o);
 
     public void delete(T o);
 
+    public T reattach(T o);
 
 }

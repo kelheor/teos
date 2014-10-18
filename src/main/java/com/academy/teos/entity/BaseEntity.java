@@ -5,7 +5,6 @@ import java.io.Serializable;
 /**
  * @author: Руслан
  */
-public interface BaseEntity<T extends Serializable>  {
-
-    public T getId();
+public abstract class BaseEntity implements Serializable {
+    abstract public String getId();
 }

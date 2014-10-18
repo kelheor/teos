@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ExceptionHandlerController {
 
-    private static final Logger LOG = Logger.getLogger(UserAccountController.class);
+    private static final Logger LOG = Logger.getLogger(ExceptionHandlerController.class);
 
     @ExceptionHandler(Exception.class)
     public @ResponseBody
     String handleException(Exception e) {
-        LOG.error("Error: " + e.getMessage(), e);
-        return "Error: " + e.getMessage();
+        LOG.error("Ошибка: " + e.getMessage(), e);
+        return "Ошибка: " + e.getMessage();
     }
 }

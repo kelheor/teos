@@ -1,6 +1,7 @@
 package com.academy.teos.controller;
 
 import com.academy.teos.controller.utils.Ajax;
+import com.academy.teos.controller.utils.RestException;
 import com.academy.teos.dto.DataDTO;
 import com.academy.teos.dto.list.DataDTOList;
 import com.academy.teos.service.APIKeyService;
@@ -33,7 +34,7 @@ public class DataController {
 
     @RequestMapping(value = "/persist", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> persist(String APIKey, String data) {
+    Map<String, Object> persist(String APIKey, String data) throws RestException {
         try {
             if(!apiKeyService.check(APIKey)) {
                 return Ajax.errorResponse("Wrong API key");
@@ -43,14 +44,13 @@ public class DataController {
             dataDTO = dataService.persist(dataDTO);
             return Ajax.successResponse(dataDTO);
         } catch (Exception e) {
-            LOG.error("Error: " + e.getMessage(), e);
-            return Ajax.errorResponse(e.getMessage());
+            throw new RestException(e);
         }
     }
 
     @RequestMapping(value = "/persistList", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> persistList(String APIKey, String dataList) {
+    Map<String, Object> persistList(String APIKey, String dataList) throws RestException {
         try {
             if(!apiKeyService.check(APIKey)) {
                 return Ajax.errorResponse("Wrong API key");
@@ -60,14 +60,13 @@ public class DataController {
             dataDTOs = dataService.persist(dataDTOs);
             return Ajax.successResponse(dataDTOs);
         } catch (Exception e) {
-            LOG.error("Error: " + e.getMessage(), e);
-            return Ajax.errorResponse(e.getMessage());
+            throw new RestException(e);
         }
     }
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public @ResponseBody
-    Map<String, Object> get(String APIKey, String id) {
+    Map<String, Object> get(String APIKey, String id) throws RestException {
         try {
             if(!apiKeyService.check(APIKey)) {
                 return Ajax.errorResponse("Wrong API key");
@@ -75,14 +74,13 @@ public class DataController {
             DataDTO dataDTO = dataService.get(id);
             return Ajax.successResponse(dataDTO);
         } catch (Exception e) {
-            LOG.error("Error: " + e.getMessage(), e);
-            return Ajax.errorResponse(e.getMessage());
+            throw new RestException(e);
         }
     }
 
     @RequestMapping(value = "/merge", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> merge(String APIKey, String data) {
+    Map<String, Object> merge(String APIKey, String data) throws RestException {
         try {
             if(!apiKeyService.check(APIKey)) {
                 return Ajax.errorResponse("Wrong API key");
@@ -92,14 +90,13 @@ public class DataController {
             dataDTO = dataService.merge(dataDTO);
             return Ajax.successResponse(dataDTO);
         } catch (Exception e) {
-            LOG.error("Error: " + e.getMessage(), e);
-            return Ajax.errorResponse(e.getMessage());
+            throw new RestException(e);
         }
     }
 
     @RequestMapping(value = "/mergeList", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> mergeList(String APIKey, String dataList) {
+    Map<String, Object> mergeList(String APIKey, String dataList) throws RestException {
         try {
             if(!apiKeyService.check(APIKey)) {
                 return Ajax.errorResponse("Wrong API key");
@@ -109,14 +106,13 @@ public class DataController {
             dataDTOs = dataService.merge(dataDTOs);
             return Ajax.successResponse(dataDTOs);
         } catch (Exception e) {
-            LOG.error("Error: " + e.getMessage(), e);
-            return Ajax.errorResponse(e.getMessage());
+            throw new RestException(e);
         }
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> delete(String APIKey, String data) {
+    Map<String, Object> delete(String APIKey, String data) throws RestException {
         try {
             if(!apiKeyService.check(APIKey)) {
                 return Ajax.errorResponse("Wrong API key");
@@ -126,14 +122,13 @@ public class DataController {
             dataService.delete(dataDTO);
             return Ajax.emptyResponse();
         } catch (Exception e) {
-            LOG.error("Error: " + e.getMessage(), e);
-            return Ajax.errorResponse(e.getMessage());
+            throw new RestException(e);
         }
     }
 
     @RequestMapping(value = "/deleteList", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
     public @ResponseBody
-    Map<String, Object> deleteList(String APIKey, String dataList) {
+    Map<String, Object> deleteList(String APIKey, String dataList) throws RestException {
         try {
             if(!apiKeyService.check(APIKey)) {
                 return Ajax.errorResponse("Wrong API key");
@@ -143,8 +138,7 @@ public class DataController {
             dataService.delete(dataDTOs);
             return Ajax.emptyResponse();
         } catch (Exception e) {
-            LOG.error("Error: " + e.getMessage(), e);
-            return Ajax.errorResponse(e.getMessage());
+            throw new RestException(e);
         }
     }
 }
