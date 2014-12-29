@@ -3,7 +3,7 @@
 <persistence-unit name="persistenceUnit" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
-    <class>com.academy.teos.entity.APIKey</class>
+    <class>com.academy.teos.entity.ApiKey</class>
     <class>com.academy.teos.entity.Data</class>
     <class>com.academy.teos.entity.UserAccount</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>

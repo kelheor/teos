@@ -1,5 +1,6 @@
 package com.academy.teos.controller;
 
+import com.academy.teos.treat.Teos;
 import com.academy.teos.controller.utils.Ajax;
 import com.academy.teos.controller.utils.RestException;
 import com.academy.teos.dto.UserAccountDTO;
@@ -43,7 +44,7 @@ public class MainController extends ExceptionHandlerController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String main() {
-		return "main";
+        return "main";
 	}
 
     @RequestMapping(value = "/register", method = RequestMethod.POST, headers = "Accept=application/json", produces = "application/json")
@@ -93,6 +94,8 @@ public class MainController extends ExceptionHandlerController {
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String main(HttpServletRequest request, Model model) {
+        Teos teos = new Teos("TEST");
+        LOG.info(teos.TeosTitle());
         LOG.info("Warning! Intruder alert: ");
         LOG.info("IP: " + request.getRemoteAddr());
         LOG.info("Client: " + request.getHeader("User-Agent"));
